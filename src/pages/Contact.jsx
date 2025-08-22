@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import ReCAPTCHA from "react-google-recaptcha";
 import emailjs from "emailjs-com";
 
-const RECAPTCHA_SITE_KEY = "6LdEwFIrAAAAAAw5NQ3TvG0T8wJcqMc8SvNuL7IX";
+const RECAPTCHA_SITE_KEY = "6LfJy0MrAAAAADNzuW2l5gKWchlFr9BgH0eAKJfV";
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
