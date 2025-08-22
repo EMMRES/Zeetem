@@ -60,7 +60,7 @@ export default function Policy() {
         <h2 className="text-xl font-semibold mb-2">7. Your Rights</h2>
         <p>
           You have the right to access, correct, or request the deletion of your personal information. To do so, please
-          contact us at <a href="mailto:zeetembeauty@gmail.com" className="text-pink-500">zeetembeauty@gmail.com</a>.
+          contact us at <a href="mailto:zeetem2000@gmail.com" className="text-pink-500">zeetem2000@gmail.com</a>.
         </p>
       </section>
 
@@ -75,7 +75,7 @@ export default function Policy() {
         <h2 className="text-xl font-semibold mb-2">9. Contact Us</h2>
         <p>
           If you have any questions about our privacy practices, please reach out to us at{" "}
-          <a href="mailto:zeetembeauty@gmail.com" className="text-pink-500">zeetembeauty@gmail.com</a>.
+          <a href="mailto:zeetem2000@gmail.com" className="text-pink-500">zeetem2000@gmail.com</a>.
         </p>
       </section>
     </div>

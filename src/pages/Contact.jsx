@@ -3,8 +3,9 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import Swal from "sweetalert2";
 import ReCAPTCHA from "react-google-recaptcha";
+import emailjs from "emailjs-com";
 
-const RECAPTCHA_SITE_KEY = "6LfR4UMrAAAAADoKoR9s5sdGN-wefVxemTm8e5pf";
+const RECAPTCHA_SITE_KEY = "6LdEwFIrAAAAAAw5NQ3TvG0T8wJcqMc8SvNuL7IX";
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -30,12 +31,26 @@ export default function Contact() {
     setLoading(true);
 
     try {
+      // Save to Firestore
       await addDoc(collection(db, "contacts"), formData);
+
+      // Send email via EmailJS
+      await emailjs.send(
+        "Contact Us",     // replace with your actual service ID
+        "template_om3l36v",    // replace with your actual template ID
+        {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        },
+        "RsUuux2h-6A4Js4wE"         // replace with your actual user ID
+      );
+
       Swal.fire("Success", "Message sent successfully!", "success");
       setFormData({ name: "", email: "", message: "" });
       setCaptchaValue(null);
     } catch (error) {
-      console.error("Error submitting contact form:", error);
+      console.error("Error:", error);
       Swal.fire("Error", "Something went wrong. Please try again.", "error");
     } finally {
       setLoading(false);

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 // Import images from the assets folder
 import Makeup1 from "../../assets/Makeup1.jpeg";
@@ -15,6 +17,13 @@ export default function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
+    // 🔧 Initialize AOS animation
+    AOS.init({
+      duration: 1000,
+      once: true, // ensures animation runs only once
+    });
+
+    // Image carousel interval
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
     }, 3000);

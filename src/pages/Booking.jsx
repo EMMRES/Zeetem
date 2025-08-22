@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
+import emailjs from 'emailjs-com';
 
-// ✅ Your reCAPTCHA v3 site key
-const RECAPTCHA_SITE_KEY = '6LfR4UMrAAAAADoKoR9s5sdGN-wefVxemTm8e5pf';
+const RECAPTCHA_SITE_KEY = '6LdEwFIrAAAAAAw5NQ3TvG0T8wJcqMc8SvNuL7IX';
 
 export default function BookingForm({ onSubmit }) {
   const [formData, setFormData] = useState({
@@ -40,13 +40,26 @@ export default function BookingForm({ onSubmit }) {
       return;
     }
 
-    onSubmit(formData);
-    alert(`Booking confirmed for ${formData.name} on ${formData.date} at ${formData.time}. Bank Transfer Ref: ${formData.bankTransfer}`);
+    // ✅ Send email via EmailJS
+    emailjs.send('Booking', 'template_yjpv6sj', {
+      name: formData.name,
+      date: formData.date,
+      time: formData.time,
+      style: formData.style,
+      bankTransfer: formData.bankTransfer,
+    }, 'RsUuux2h-6A4Js4wE')
+    .then(() => {
+      alert(`Booking confirmed for ${formData.name} on ${formData.date} at ${formData.time}. Email notification sent!`);
+      setFormData({ name: '', date: '', time: '', style: '', bankTransfer: '' });
+      setAgreeToTerms(false);
+      setCaptchaValue(null);
+    })
+    .catch((error) => {
+      console.error('EmailJS Error:', error);
+      alert('Error sending booking email. Please try again.');
+    });
 
-    // Reset form
-    setFormData({ name: '', date: '', time: '', style: '', bankTransfer: '' });
-    setAgreeToTerms(false);
-    setCaptchaValue(null);
+    if (onSubmit) onSubmit(formData);
   };
 
   return (
@@ -57,10 +70,12 @@ export default function BookingForm({ onSubmit }) {
       {/* Payment Info */}
       <div className="bg-gray-100 dark:bg-gray-800 border border-pink-300 dark:border-pink-600 rounded-md p-4 text-sm">
         <p className="font-semibold mb-1">💳 Payment Details:</p>
-        <p>Bank Name: <strong>Firtst Bank</strong></p>
+        <p>Bank Name: <strong>First Bank</strong></p>
         <p>Account Name: <strong>Adebayo Zanab Temitope</strong></p>
-        <p>Account Number: <strong>1234567890</strong></p>
-        <p className="mt-2 text-xs italic text-pink-600 dark:text-pink-400">Please make payment and input your transfer reference number below.</p>
+        <p>Account Number: <strong>3129522877</strong></p>
+        <p className="mt-2 text-xs italic text-pink-600 dark:text-pink-400">
+          Please make payment and input your transfer reference number below.
+        </p>
       </div>
 
       {/* Full Name */}

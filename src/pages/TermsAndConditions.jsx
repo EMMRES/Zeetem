@@ -33,7 +33,7 @@ export default function TermsAndConditions() {
 
       <h2 className="text-2xl font-semibold mt-8 mb-2">3. Cancellations & Rescheduling</h2>
       <p className="mb-4">
-        We understand that plans can chage, cancellations on the day of your appointment will not be refunded, if you cancel before before the appointment day you will not be refunded,
+        We understand that plans can chage, cancellations on the day of your appointment will not be refunded, if you cancel  before the appointment day you will not be refunded,
         you will be allowed to reschedule once which must be 24hours before the original date
       </p>
 
